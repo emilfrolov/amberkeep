@@ -1,6 +1,6 @@
 ---
 name: archive-to-obsidian
-description: Convert a user-provided Claude data export ZIP, directory, or JSON into linked Obsidian Markdown, exported memory notes, preserved sources, and an import report. Use for archive migration with Amberkeep.
+description: Import a provided Claude export ZIP, folder, or JSON into linked Obsidian notes, exported memory, preserved sources, and an import report. Use Amberkeep for archive migration.
 ---
 
 # Amberkeep: archive to Obsidian
