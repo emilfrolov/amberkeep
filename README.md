@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/emilfrolov/amberkeep/actions/workflows/tests.yml"><img src="https://github.com/emilfrolov/amberkeep/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+  <a href="https://github.com/emilfrolov/amberkeep/actions/workflows/tests.yml"><img src="https://github.com/emilfrolov/amberkeep/actions/workflows/tests.yml/badge.svg?branch=main&amp;event=push" alt="Tests (main)"></a>
   &nbsp; Python 3.10+ &nbsp;·&nbsp; MIT &nbsp;·&nbsp; No dependencies
 </p>
 
