@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest an improvement to archive conversion or the user experience.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check existing issues before suggesting a feature. Describe your task using invented examples, without sharing private conversations or exports.
+        Amberkeep currently converts a supplied export into a new archive; it does not retrieve a live Claude account or synchronize existing vaults.
+  - type: textarea
+    id: task
+    attributes:
+      label: What are you trying to do?
+      description: Explain the user task and what makes it difficult today.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired behavior
+      description: Describe the result you would expect, including a small invented example if useful.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and tradeoffs
+      description: Optional. Mention a workaround, related issue, or effect on privacy, source preservation, compatibility, or archive size.

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Expanded community and contribution guides, support and conduct policies, and a maintainer release guide.
+- Added issue forms for bugs, export formats, ideas, and usage questions, plus a pull request template.
+
 ## 0.1.0 — 2026-11-08
 
 Initial community release.

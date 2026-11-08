@@ -1,33 +1,82 @@
 name: Bug report
-description: Report a converter problem using synthetic data only.
+description: Report a problem with installation, conversion, or generated notes.
 body:
   - type: markdown
     attributes:
-      value: Please do not attach your real export, private conversations, or credentials.
+      value: |
+        Check the troubleshooting guide and existing issues first.
+        This is a public issue. Use invented data only; do not attach a real export, conversation text, credentials, or a full manifest. Replace private paths and filenames in error messages.
   - type: input
     id: version
     attributes:
-      label: Amberkeep and Python versions
-      placeholder: Amberkeep 0.1.0, Python 3.12
+      label: Amberkeep version
+      description: Use the release number or commit, or say unknown if installation did not complete.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: run_mode
+    attributes:
+      label: How are you using Amberkeep?
+      options:
+        - Local Python command
+        - Claude Code plugin or manual skill
+        - Claude chat skill or plugin
+        - Claude Cowork
+        - Installation has not completed
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Operating system and Python version
+      description: Include the versions you know. For a hosted Claude session, say hosted; do not share account identifiers.
+      placeholder: Windows 11, Python 3.12; or hosted Claude chat
+  - type: dropdown
+    id: input_type
+    attributes:
+      label: Input type
+      options:
+        - ZIP export
+        - Extracted export directory
+        - JSON file
+        - No input yet or not applicable
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the command or installation steps, using example paths and filenames.
+      placeholder: |
+        1. Install the skill ZIP from release ...
+        2. Run the converter with --input /example/export.zip --output /example/New-Archive
+        3. Observe ...
     validations:
       required: true
   - type: textarea
     id: problem
     attributes:
       label: What happened?
-      description: Include the error or import-report warning and what you expected.
+      description: Include the relevant error or report warning after removing private paths and contents.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
     validations:
       required: true
   - type: textarea
     id: reproduction
     attributes:
       label: Minimal synthetic example
-      description: Use invented JSON and remove account identifiers and real conversation text.
+      description: If a data shape triggers the problem, provide the smallest invented JSON example. Leave this empty for an installation problem.
       render: json
   - type: checkboxes
     id: privacy
     attributes:
       label: Privacy
       options:
-        - label: This report contains no private export or real conversation contents.
+        - label: This report contains no real export, private conversation contents, credentials, or account identifiers.
           required: true

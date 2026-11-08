@@ -14,6 +14,7 @@
   <a href="docs/INSTALLATION.md">Installation</a> ·
   <a href="docs/EXPORT-GUIDE.md">Export guide</a> ·
   <a href="docs/PRIVACY.md">Privacy</a> ·
+  <a href="COMMUNITY.md">Community</a> ·
   <a href="CONTRIBUTING.md">Contribute</a>
 </p>
 
@@ -117,7 +118,14 @@ Claude's export format can change, and Anthropic does not publish a stable expor
 - [Supported formats and limitations](docs/FORMAT-SUPPORT.md)
 - [Privacy and data handling](docs/PRIVACY.md)
 - [Troubleshooting](docs/TROUBLESHOOTING.md)
+- [Community guide](COMMUNITY.md) · [Getting help](SUPPORT.md)
 - [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Changelog](CHANGELOG.md)
+
+## Join the community
+
+Try the synthetic demo, help someone with installation, report an export shape with an invented example, or improve a guide. Code, documentation, translations, and thoughtful bug reports all help Amberkeep become more useful.
+
+Start with the [community guide](COMMUNITY.md) to choose a first contribution. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and pull requests, [SUPPORT.md](SUPPORT.md) for questions, and the [code of conduct](CODE_OF_CONDUCT.md) for participation expectations. The [maintainer guide](docs/MAINTAINING.md) describes reviews and releases.
 
 ## Development
 

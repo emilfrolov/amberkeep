@@ -71,7 +71,7 @@ def main():
     write_zip(skill_path, skill_entries)
 
     plugin_entries = []
-    for name in ("README.md", "LICENSE", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "docs", "assets", "skills", "examples", "tests", "tools"):
+    for name in ("README.md", "LICENSE", "CHANGELOG.md", "COMMUNITY.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "SUPPORT.md", "SECURITY.md", "docs", "assets", "skills", "examples", "tests", "tools"):
         for file in files_in(ROOT / name):
             plugin_entries.append((file, "amberkeep/" + file.relative_to(ROOT).as_posix()))
     plugin_entries.append((ROOT / ".claude-plugin" / "plugin.json", "amberkeep/.claude-plugin/plugin.json"))

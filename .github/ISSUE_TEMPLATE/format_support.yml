@@ -1,0 +1,55 @@
+name: Export format support
+description: Request support for an unfamiliar export shape using an invented example.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when a supplied export shape is retained as raw data or rendered differently from what you need.
+        Do not upload a real archive, report, manifest, or conversation. Invent the values and identifiers while preserving only the JSON structure needed to explain the issue.
+  - type: input
+    id: version
+    attributes:
+      label: Amberkeep version
+      placeholder: 0.1.0 or commit
+    validations:
+      required: true
+  - type: textarea
+    id: layout
+    attributes:
+      label: File layout and current result
+      description: Use example filenames. Include the relevant report status or warning without private contents.
+      placeholder: A JSON file under projects/ is preserved as raw data, but no project note appears.
+    validations:
+      required: true
+  - type: textarea
+    id: shape
+    attributes:
+      label: Smallest invented JSON example
+      description: Keep the necessary keys and nesting. Replace every value from your real export with invented data.
+      render: json
+      placeholder: |
+        {
+          "example_id": "synthetic-001",
+          "example_content": "Invented text"
+        }
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected readable result
+      description: Describe the note, field, or link you would like to see. Separate information supplied by the export from information that would have to be inferred.
+    validations:
+      required: true
+  - type: input
+    id: reference
+    attributes:
+      label: Public format reference, if available
+      description: An official document or public source-code link can help. Never include a signed download link or a URL containing credentials.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: All sample values are invented, and this report contains no real export or private conversation contents.
+          required: true

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Help and usage questions
+    url: https://github.com/emilfrolov/amberkeep/blob/main/SUPPORT.md
+    about: Find installation, troubleshooting, and public support routes.
+  - name: Security reporting
+    url: https://github.com/emilfrolov/amberkeep/blob/main/SECURITY.md
+    about: Read the reporting guidance before disclosing a security issue.

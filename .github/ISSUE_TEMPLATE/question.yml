@@ -1,0 +1,43 @@
+name: Setup or usage question
+description: Ask for help with installation, conversion, or opening an archive in Obsidian.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check SUPPORT.md and the troubleshooting guide first. Use this form if you are still stuck.
+        This is public: do not share a real export, conversation, full manifest, credentials, or private paths.
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: stuck
+    attributes:
+      label: Where are you stuck?
+      description: Describe the step, what you tried, and any relevant message using example paths and filenames.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Versions, if known
+      placeholder: Amberkeep 0.1.0; Python 3.12; macOS
+  - type: dropdown
+    id: run_mode
+    attributes:
+      label: How are you using Amberkeep?
+      options:
+        - Local Python command
+        - Claude Code plugin or manual skill
+        - Claude chat skill or plugin
+        - Claude Cowork
+        - Not installed yet
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: This question contains no real export, private conversation contents, credentials, or account identifiers.
+          required: true
