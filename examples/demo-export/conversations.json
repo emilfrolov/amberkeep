@@ -1,0 +1,63 @@
+[
+  {
+    "uuid": "demo-conversation-001",
+    "name": "A small knowledge garden",
+    "created_at": "2026-01-10T09:00:00Z",
+    "updated_at": "2026-01-10T09:04:00Z",
+    "project_uuid": "demo-project-001",
+    "chat_messages": [
+      {
+        "uuid": "demo-message-001",
+        "sender": "human",
+        "created_at": "2026-01-10T09:00:00Z",
+        "text": "Help me organize a small reading project in Obsidian.",
+        "content": [
+          {"type": "text", "text": "Help me organize a small reading project in Obsidian."}
+        ]
+      },
+      {
+        "uuid": "demo-message-002",
+        "sender": "assistant",
+        "created_at": "2026-01-10T09:01:00Z",
+        "parent_message_uuid": "demo-message-001",
+        "text": "Start with an index, a reading list, and a note for each idea. Link related ideas as you go.",
+        "content": [
+          {"type": "text", "text": "Start with an index, a reading list, and a note for each idea. Link related ideas as you go."}
+        ]
+      },
+      {
+        "uuid": "demo-message-003",
+        "sender": "human",
+        "created_at": "2026-01-10T09:04:00Z",
+        "text": "Here is an invented handout for this demo.",
+        "attachments": [
+          {"file_name": "demo-handout.txt", "file_type": "text/plain", "extracted_content": "A synthetic handout: keep sources, questions, and conclusions separate."}
+        ]
+      }
+    ]
+  },
+  {
+    "uuid": "demo-conversation-002",
+    "name": "Идея для заметки",
+    "created_at": "2026-01-11T11:00:00Z",
+    "updated_at": "2026-01-11T11:02:00Z",
+    "chat_messages": [
+      {
+        "uuid": "demo-message-004",
+        "sender": "human",
+        "created_at": "2026-01-11T11:00:00Z",
+        "text": "Сохрани идею: хорошие заметки связывают вопросы и наблюдения."
+      },
+      {
+        "uuid": "demo-message-005",
+        "sender": "assistant",
+        "created_at": "2026-01-11T11:02:00Z",
+        "text": "Назовём её «Заметка как мост». Это вымышленный пример.",
+        "content": [
+          {"type": "text", "text": "Назовём её «Заметка как мост». Это вымышленный пример."},
+          {"type": "future_demo_block", "data": {"purpose": "Demonstrate preservation of an unfamiliar block", "synthetic": true}}
+        ]
+      }
+    ]
+  }
+]

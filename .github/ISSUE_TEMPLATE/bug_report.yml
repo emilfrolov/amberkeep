@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a converter problem using synthetic data only.
+body:
+  - type: markdown
+    attributes:
+      value: Please do not attach your real export, private conversations, or credentials.
+  - type: input
+    id: version
+    attributes:
+      label: Amberkeep and Python versions
+      placeholder: Amberkeep 0.1.0, Python 3.12
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include the error or import-report warning and what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal synthetic example
+      description: Use invented JSON and remove account identifiers and real conversation text.
+      render: json
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: This report contains no private export or real conversation contents.
+          required: true

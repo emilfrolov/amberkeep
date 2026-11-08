@@ -1,0 +1,12 @@
+[
+  {
+    "account_uuid": "demo-account-001",
+    "conversations_memory": "This fictional user prefers concise explanations and Markdown notes.",
+    "project_memories": {
+      "demo-project-001": "The fictional reading garden separates questions, sources, and conclusions."
+    },
+    "memory_files": [
+      {"path": "preferences/reading.md", "content": "Synthetic preference: review the reading list every Friday.", "updated_at": "2026-01-11T12:00:00Z"}
+    ]
+  }
+]

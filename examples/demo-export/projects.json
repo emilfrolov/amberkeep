@@ -1,0 +1,12 @@
+[
+  {
+    "uuid": "demo-project-001",
+    "name": "The reading garden",
+    "description": "An entirely fictional project for trying Amberkeep.",
+    "prompt_template": "Keep suggestions practical and separate facts from questions.",
+    "created_at": "2026-01-10T08:30:00Z",
+    "docs": [
+      {"uuid": "demo-document-001", "filename": "Reading principles.md", "content": "Capture one idea per note. Keep the source. Link the next question.", "created_at": "2026-01-10T08:35:00Z"}
+    ]
+  }
+]

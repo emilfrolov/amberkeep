@@ -1,0 +1,15 @@
+{
+  "name": "amberkeep",
+  "displayName": "Amberkeep",
+  "version": "0.1.0",
+  "description": "Turn a downloaded Claude data export into a linked Obsidian archive of conversations, projects, and memory, with original source bytes and an import report.",
+  "author": {
+    "name": "emilfrolov",
+    "url": "https://github.com/emilfrolov"
+  },
+  "homepage": "https://github.com/emilfrolov/amberkeep",
+  "repository": "https://github.com/emilfrolov/amberkeep",
+  "icon": "./assets/icon.png",
+  "license": "MIT",
+  "keywords": ["obsidian", "archive", "export", "markdown", "memory"]
+}
