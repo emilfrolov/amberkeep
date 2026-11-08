@@ -19,6 +19,9 @@ body:
     attributes:
       label: How are you using Amberkeep?
       options:
+        - Obsidian desktop plugin with direct Claude sync
+        - Claude Desktop MCP knowledge analysis
+        - Local Ollama knowledge analysis
         - Local Python command
         - Claude Code plugin or manual skill
         - Claude chat skill or plugin
@@ -37,6 +40,7 @@ body:
     attributes:
       label: Input type
       options:
+        - Direct Claude account connection
         - ZIP export
         - Extracted export directory
         - JSON file

@@ -1,0 +1,6 @@
+f2ddddc93a9abd7b9cfc2b89b29f8d0c756df1ac252c68fd962792d4dd932ef0  amberkeep-skill-v0.2.0.zip
+bbb2893688c8cfd4d9a4d9faa691a18d7496e9d159dde5bcc732cb0ba78da022  amberkeep-plugin-v0.2.0.zip
+24b898e0a968fcc1f6de673b420f56a4c411ffe9f5d8d6086d0958d8c1b63cf7  amberkeep-demo-v0.2.0.zip
+f24da96e76e2d73f9b787757a361c130ec2e540b992f0f1300194bbea17907b6  amberkeep-obsidian-v0.2.0.zip
+3ef751ad5c9bc73c824dfe77dd7c7de3aab8dc10a1b5a4bced057b71e3aaa817  amberkeep-desktop-v0.2.0.mcpb
+ce23d05a4a0a791f4e7753406931c9aa0fb7ffbc1c3537ffd1586330b7bc2a2a  amberkeep-knowledge-demo-v0.2.0.zip

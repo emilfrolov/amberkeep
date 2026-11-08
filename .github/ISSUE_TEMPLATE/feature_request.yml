@@ -5,7 +5,7 @@ body:
     attributes:
       value: |
         Check existing issues before suggesting a feature. Describe your task using invented examples, without sharing private conversations or exports.
-        Amberkeep currently converts a supplied export into a new archive; it does not retrieve a live Claude account or synchronize existing vaults.
+        The desktop preview synchronizes a separately connected Claude account into owned Obsidian notes. The archive importer remains an offline fallback. Describe which workflow your request changes.
   - type: textarea
     id: task
     attributes:

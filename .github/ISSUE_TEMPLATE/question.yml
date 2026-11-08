@@ -29,6 +29,9 @@ body:
     attributes:
       label: How are you using Amberkeep?
       options:
+        - Obsidian desktop plugin
+        - Claude Desktop MCP companion
+        - Local Ollama analysis
         - Local Python command
         - Claude Code plugin or manual skill
         - Claude chat skill or plugin

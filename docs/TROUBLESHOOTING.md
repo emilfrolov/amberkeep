@@ -1,5 +1,7 @@
 # Troubleshooting
 
+This page covers archive conversion. For direct sign-in, synchronization, and semantic analysis, see [desktop troubleshooting](DESKTOP.md).
+
 ## Claude cannot see the skill
 
 Check that code execution is enabled and that your account or organization permits custom skills. Upload the release's **skill ZIP**, rather than the repository source ZIP. Its root contains exactly one `archive-to-obsidian/` folder with `SKILL.md`.

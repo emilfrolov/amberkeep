@@ -1,0 +1,23 @@
+{
+  "name": "amberkeep-desktop",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Claude Desktop MCP bridge for Amberkeep's Obsidian knowledge graph",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test test/*.test.js",
+    "verify": "npm test && npm run build && node test/smoke-bundle.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "ajv": "8.20.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "2.1.2",
+    "esbuild": "0.28.2"
+  }
+}

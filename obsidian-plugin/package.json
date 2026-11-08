@@ -1,0 +1,12 @@
+{
+  "name": "amberkeep-obsidian",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

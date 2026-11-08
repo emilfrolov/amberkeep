@@ -1,6 +1,6 @@
 # Getting help
 
-Start with the [installation guide](docs/INSTALLATION.md), [export guide](docs/EXPORT-GUIDE.md), and [troubleshooting](docs/TROUBLESHOOTING.md). Amberkeep converts a downloaded export; it does not retrieve a Claude account or synchronize a vault.
+Start with the [desktop guide](docs/DESKTOP.md), [installation guide](docs/INSTALLATION.md), and [knowledge-graph guide](docs/KNOWLEDGE-GRAPH.md). For the offline fallback, use the [export guide](docs/EXPORT-GUIDE.md) and [archive troubleshooting](docs/TROUBLESHOOTING.md).
 
 ## Choose the right place
 
@@ -17,7 +17,7 @@ Search [existing issues](https://github.com/emilfrolov/amberkeep/issues) first. 
 
 ## Information that helps
 
-For a technical problem, include the Amberkeep version, Python version if relevant, operating system, and whether you ran a local command, a Claude skill, or the plugin. Explain what you expected and what happened. Share the exact error after replacing private paths and identifiers with invented values.
+For a technical problem, include the Amberkeep version, Obsidian and Claude Desktop versions when relevant, operating system, and whether you used direct sync, MCP, local inference, or the archive importer. Explain what you expected and what happened. Share the exact error after replacing private paths and identifiers with invented values.
 
 For local conversion, these commands show the versions:
 

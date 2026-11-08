@@ -1,5 +1,7 @@
 # Bring your Claude archive into Obsidian
 
+This is the **archive-import fallback**. The [desktop workflow](DESKTOP.md) connects directly and does not require an export email.
+
 Amberkeep converts a downloaded Claude export into an Obsidian-ready folder. It reads the input you choose; it does not retrieve your account, request an export, or search your Claude history. Parsing needs no Claude login, API key, browser cookies, or Obsidian plugin.
 
 ## 1. Download your data from Claude

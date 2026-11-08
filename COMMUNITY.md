@@ -1,6 +1,6 @@
 # Welcome to the Amberkeep community
 
-Amberkeep helps people preserve a downloaded Claude export in Obsidian. The community can make that migration more reliable through small, well-described improvements and shared knowledge about export formats.
+Amberkeep connects Claude conversations to an evidence-linked Obsidian knowledge graph. The desktop preview adds direct sync, Claude Desktop analysis, and optional local inference; the archive importer remains a fallback. Focused contributions can improve both paths.
 
 You can participate without writing code. Installation feedback, clearer instructions, invented compatibility examples, translations, and careful reviews are valuable contributions.
 
@@ -40,6 +40,6 @@ The offline converter does not send data to the maintainer. Running the skill in
 
 Be specific about what you tried, what you expected, and what happened. Separate facts from suggestions, ask questions kindly, and give contributors room to learn. English is used for the primary docs and code, but questions in other languages are welcome.
 
-Amberkeep is an early community project maintained by [emilfrolov](https://github.com/emilfrolov), with contributions welcome from others. Feature ideas are proposals until they are implemented and documented. Automatic account retrieval, batch merging, and ongoing vault synchronization are not current capabilities.
+Amberkeep is an early community project maintained by [emilfrolov](https://github.com/emilfrolov), with contributions welcome from others. Feature ideas are proposals until they are implemented and documented. Direct account sync belongs to the experimental desktop preview. Archive-batch merging and guaranteed recovery of unavailable history are not current capabilities.
 
 Participation follows the [Code of Conduct](CODE_OF_CONDUCT.md). Maintainers may ask for a smaller reproduction, suggest a different scope, or close work that does not fit the project. A focused report or contribution is easier to review, but no response time is guaranteed.

@@ -1,0 +1,45 @@
+{
+  "manifest_version": "0.3",
+  "name": "amberkeep-desktop",
+  "display_name": "Amberkeep Knowledge Graph",
+  "version": "0.2.0",
+  "description": "Use Claude Desktop to turn your synchronized Claude history into an evidence-linked Obsidian knowledge graph.",
+  "long_description": "Connect to the Amberkeep plugin in an explicitly selected Obsidian vault. Synchronize history, read pending source pages, and save grounded concepts, decisions, and questions with source quotations. The extension connects only to the plugin's authenticated loopback bridge. It needs no API key and does not read Claude Desktop cookies.",
+  "author": {
+    "name": "emilfrolov",
+    "url": "https://github.com/emilfrolov"
+  },
+  "repository": { "type": "git", "url": "https://github.com/emilfrolov/amberkeep.git" },
+  "homepage": "https://github.com/emilfrolov/amberkeep",
+  "documentation": "https://github.com/emilfrolov/amberkeep/blob/main/desktop-extension/README.md",
+  "support": "https://github.com/emilfrolov/amberkeep/issues",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server.js"],
+      "env": { "AMBERKEEP_VAULT": "${user_config.vault_path}" }
+    }
+  },
+  "tools": [
+    { "name": "amberkeep_status", "description": "Check connection, synchronization, and analysis progress." },
+    { "name": "amberkeep_sync", "description": "Start incremental synchronization in Obsidian." },
+    { "name": "amberkeep_list_pending", "description": "List sources that still need semantic analysis." },
+    { "name": "amberkeep_read_source", "description": "Read a source page with stable message IDs." },
+    { "name": "amberkeep_save_knowledge", "description": "Save evidence-grounded knowledge from a fully read source." },
+    { "name": "amberkeep_open_graph", "description": "Open the knowledge graph in Obsidian." }
+  ],
+  "keywords": ["obsidian", "knowledge-graph", "memory", "claude", "provenance"],
+  "license": "MIT",
+  "compatibility": { "platforms": ["darwin"], "runtimes": { "node": ">=18.0.0" } },
+  "user_config": {
+    "vault_path": {
+      "type": "directory",
+      "title": "Obsidian vault",
+      "description": "Choose the vault where the Amberkeep Obsidian plugin is enabled. Keep that vault open while using these tools.",
+      "required": true
+    }
+  }
+}

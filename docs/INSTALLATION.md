@@ -1,75 +1,100 @@
-# Install Amberkeep
+# Install Amberkeep on macOS
 
-Choose the skill for Claude chat, the community plugin for Claude Code, or the local Python command. All three use the same bundled converter. Amberkeep does not require an Anthropic API key, an Obsidian plugin, or an Obsidian account.
+This guide installs the **v0.2.0 desktop preview**: an Obsidian plugin for direct synchronization, plus an optional Claude Desktop companion for semantic analysis. The companion can be replaced by an explicitly configured local Ollama model.
 
-## Claude chat: skill ZIP
+Direct synchronization uses Claude's unsupported website API. A live macOS login and complete real-account sync have not yet been validated. Automated tests and a local Linux Electron fixture do not establish compatibility with every account or installed app version.
 
-1. Download `amberkeep-skill-v0.1.0.zip` from the [latest release](https://github.com/emilfrolov/amberkeep/releases/latest).
-2. In Claude, open **Customize → Skills**, choose **Add**, then **Upload a skill**. Interface labels can change; consult [Claude's custom-skill instructions](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills) if your account shows a different route.
-3. Upload the ZIP without unpacking it. It contains one `archive-to-obsidian/` folder with `SKILL.md` and the converter.
-4. Enable code execution and file creation if your account requires it. Organization administrators may restrict skills or code execution.
-5. Attach your downloaded export and ask Amberkeep to convert it into a new Obsidian archive.
+## Requirements and downloads
 
-The chat version runs inside Claude's file workspace. It returns a ZIP for you to download; it does not write into Obsidian on your computer. Uploading an export to Claude shares it with Claude under your account's terms and privacy settings. Use local conversion for sensitive archives you want to keep on your computer.
+- macOS with Obsidian 1.7 or newer and a local filesystem vault.
+- Permission to install community plugins in that vault.
+- Your own Claude account. For the companion workflow, a Claude Desktop version and account configuration that allow local extensions.
 
-## Claude Code: community marketplace
+Download from the explicit [v0.2.0 preview release](https://github.com/emilfrolov/amberkeep/releases/tag/v0.2.0):
 
-Run these commands inside Claude Code:
+| File | Install in |
+| --- | --- |
+| [amberkeep-obsidian-v0.2.0.zip](https://github.com/emilfrolov/amberkeep/raw/refs/heads/main/downloads/v0.2.0/amberkeep-obsidian-v0.2.0.zip) | Your Obsidian vault |
+| [amberkeep-desktop-v0.2.0.mcpb](https://github.com/emilfrolov/amberkeep/raw/refs/heads/main/downloads/v0.2.0/amberkeep-desktop-v0.2.0.mcpb) | Claude Desktop, if using Claude for semantic analysis |
+| [amberkeep-knowledge-demo-v0.2.0.zip](https://github.com/emilfrolov/amberkeep/raw/refs/heads/main/downloads/v0.2.0/amberkeep-knowledge-demo-v0.2.0.zip) | A separate demo vault in Obsidian |
 
-```text
-/plugin marketplace add emilfrolov/amberkeep
-/plugin install amberkeep@amberkeep-community
-```
+Normal installation needs no Python, separately installed Node.js, terminal commands, or API key. The Obsidian plugin ships bundled JavaScript; the `.mcpb` companion uses Claude Desktop's runtime.
 
-Then use `/amberkeep:archive-to-obsidian`, or ask to convert an export at an explicit local path. Python 3.10 or newer must be available to the local session.
+## 1. Install the Obsidian plugin
 
-This repository is its own community marketplace. Installing from it does not imply inclusion in Anthropic's official directory.
+1. Unpack `amberkeep-obsidian-v0.2.0.zip`.
+2. In Finder, open your chosen vault. Press **Command–Shift–.** if you need to show its hidden `.obsidian` folder.
+3. Create `plugins/amberkeep/` inside `.obsidian/` if it does not exist, and place the plugin files there:
 
-### Manual skill folder
+   ```text
+   YOUR-VAULT/
+     .obsidian/
+       plugins/
+         amberkeep/
+           manifest.json
+           main.js
+           styles.css
+   ```
 
-Alternatively, copy `skills/archive-to-obsidian/` from this repository to either:
+   Avoid an extra nested `amberkeep/` directory: `manifest.json` must be directly inside the plugin folder shown above.
+4. Open the vault in Obsidian. Go to **Settings → Community plugins**, enable community plugins if needed, and enable **Amberkeep**. Reload Obsidian if it does not appear.
+5. Open Amberkeep using its ribbon icon, status-bar item, or **Amberkeep: Open dashboard** command.
 
-```text
-~/.claude/skills/archive-to-obsidian/
-```
+This is a manual community installation. The preview is not listed in Obsidian's community-plugin browser.
 
-or a project's:
+## 2. Connect Claude once
 
-```text
-.claude/skills/archive-to-obsidian/
-```
+Choose **Connect Claude** in Amberkeep's dashboard or settings. Sign in to your own account inside the panel. Use **Check connection** if it does not finish automatically. Successful connection enables collection and starts the first synchronization.
 
-The copied folder must contain `SKILL.md`, `scripts/convert.py`, and `references/format-support.md`. Open a new Claude Code session after installing. Do not install both the standalone skill and the plugin unless you intentionally want duplicate skill entries.
+This isolated persistent sign-in is separate from Claude Desktop's login. It does not import that app's cookies or read Keychain. A normal email login code, when required, is entered in Claude's sign-in interface. Google or another identity provider may block the embedded panel; the preview does not bypass that restriction.
 
-## Plugin ZIP: manual testing
+The default **Knowledge folder** is `Amberkeep`. After connection, **Automatic history sync** defaults to every 15 minutes while Obsidian is open, and enabled connections can resume on later launches. Change the interval or choose **Off** in settings. **Disconnect** disables collection; notes and caches remain.
 
-The release also includes `amberkeep-plugin-v0.1.0.zip`. On Claude surfaces that support plugin uploads, use **Customize → Plugins → Add → Upload plugin**. The ZIP contains one plugin folder with `.claude-plugin/plugin.json` and the skill. Surface support and organization settings vary; the standalone skill and local converter remain separate installation choices.
+Synchronization creates source notes and structural or lexical navigation. To create the model-written semantic layer, choose one of the following analysis modes.
 
-## Local terminal
+## 3A. Use your current Claude Desktop session
 
-```bash
-git clone https://github.com/emilfrolov/amberkeep.git
-cd amberkeep
-python3 --version
-python3 skills/archive-to-obsidian/scripts/convert.py --help
-```
+1. Keep the connected vault open in Obsidian.
+2. Double-click `amberkeep-desktop-v0.2.0.mcpb`. If needed, install the file through Claude Desktop's **Settings → Extensions** interface.
+3. When prompted for **Obsidian vault**, select the same vault directory—not its `.obsidian` subdirectory.
+4. Enable or approve Amberkeep's tools in the Claude conversation where you want to work. Account or organization policies may restrict extensions and tool use.
+5. Ask Claude:
 
-Use `python` or `py -3` instead of `python3` if that is how your Python installation is exposed. Python must be version 3.10 or newer. No `pip install` is necessary.
+   > Use Amberkeep to sync my history and build its knowledge graph in Obsidian. Check sync progress, then process pending sources in batches. Read every page of each source, extract useful concepts, decisions, and questions, and save them with exact source quotations. Report pending work and failures, then open the graph.
 
-```bash
-python3 skills/archive-to-obsidian/scripts/convert.py \
-  --input "/path/to/export.zip" \
-  --output "/path/to/Claude-Archive" \
-  --zip "/path/to/Claude-Archive.zip"
-```
+The companion reads the selected plugin's authenticated local bridge. It does not log in independently or access arbitrary vault files. Long histories may require a later request to continue; completed analysis is tracked against each source's current hash.
 
-Choose a new output folder and ZIP in an existing parent directory. Keep them outside the input directory. The converter refuses to overwrite an existing destination.
+See the [companion guide](../desktop-extension/README.md) for tool behavior and connection troubleshooting.
+
+## 3B. Run semantic analysis automatically with Ollama
+
+Use this option if you want pending sources analysed after synchronization without an active Claude Desktop conversation.
+
+1. Install and run [Ollama](https://ollama.com/) yourself. Select an installed local model suitable for your hardware and source context length.
+2. In Amberkeep settings, enter its exact name under **Local Ollama model (optional)**. This field is empty by default. **List models** can help find installed local names.
+3. Check **Local Ollama address**; its default is `http://127.0.0.1:11434`. Only loopback addresses with an explicit port are accepted.
+4. Use **Sync now**, or **Analyse pending locally** for already synchronized sources. With automatic history sync enabled, later source updates can trigger local analysis while Obsidian and Ollama remain open.
+
+Amberkeep does not install models or configure a paid inference API. Known cloud-model names and remote endpoints are refused. Review the local service's own configuration; its inference and logging behavior remain your responsibility.
+
+Sources above the local serialized-input limit, invalid evidence, and failed requests stay pending. Use the companion's paged workflow for sources too large for local analysis. See [the desktop guide](DESKTOP.md#optional-automatic-semantic-analysis-with-a-local-model) for the current limits.
+
+## Inspect the result
+
+The dashboard separates synchronized source counts, AI-analysed sources, pending work, and warnings. Use **Open knowledge graph** to open the managed area in Obsidian. Enable Obsidian's **Graph view** core plugin if required.
+
+Follow a concept's evidence links to its source messages. Lexical topics and candidate excerpts are labelled as suggestions; they are not the same as completed model analysis. Edited generated blocks produce proposed replacements under the managed root's `Conflicts/` folder instead of silently overwriting your changes.
+
+For a private-data-free preview, unpack the knowledge-demo ZIP and open its demo vault folder in Obsidian. Its sources and example enrichments are invented and hand-authored; it does not demonstrate a live account sync or model run.
 
 ## Update or uninstall
 
-- Skill upload: replace the uploaded Amberkeep skill with the new release through Claude's skill settings.
-- Claude Code plugin: refresh the marketplace and update `amberkeep@amberkeep-community` using Claude Code's plugin manager.
-- Manual folder: replace the installed skill folder with the new version.
-- Terminal: pull or download the new release.
+To update the Obsidian plugin, disable it, replace its distributed `main.js`, `manifest.json`, and `styles.css`, then enable it again. Preserve existing `data.json`, `snapshot.json`, `knowledge.json`, and `graph-index.json` if you want to retain settings, synchronized material, and analysis. Install a newer companion `.mcpb` through Claude Desktop and verify the selected vault.
 
-Uninstalling the skill or plugin does not delete generated archives. You control their files and backups.
+To stop collection, choose **Disconnect**. The plugin clears its own cookie store only when the host supports that operation; otherwise it reports that the isolated login may persist. Disable the Obsidian plugin to close the local bridge, and remove the Desktop extension if you no longer want its tools available. Generated notes and caches are not automatically deleted. See [privacy](PRIVACY.md) before removing or sharing them.
+
+## Archive-import fallback
+
+If the experimental native connection is unavailable, you can use the independent archive converter with a downloaded export. See [the archive guide](EXPORT-GUIDE.md) and [format support](FORMAT-SUPPORT.md).
+
+The optional [archive skill ZIP](https://github.com/emilfrolov/amberkeep/raw/refs/heads/main/downloads/v0.2.0/amberkeep-skill-v0.2.0.zip) installs as a custom skill in Claude. Its standalone terminal converter requires Python 3.10+ and no third-party packages. This file-based workflow does not install the native Obsidian plugin or reuse its connection.

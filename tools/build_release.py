@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 from pathlib import Path
 import subprocess
@@ -53,6 +54,9 @@ def write_zip(path: Path, entries):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--desktop', action='store_true', help='Include prebuilt Obsidian and Claude Desktop distributions')
+    options = parser.parse_args()
     manifest = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
     version = manifest["version"]
     if manifest["name"] != "amberkeep" or not all(c in "0123456789." for c in version):
@@ -90,9 +94,31 @@ def main():
         write_zip(demo_path, [(file, "Amberkeep-Demo/" + file.relative_to(demo_output).as_posix()) for file in sorted(demo_output.rglob("*")) if file.is_file()])
 
     outputs = [skill_path, plugin_path, demo_path]
+    desktop_demo = None
+    if options.desktop:
+        native = ROOT / 'obsidian-plugin'
+        for name in ('main.js', 'manifest.json', 'styles.css'):
+            if not (native / name).is_file():
+                raise ValueError('Build the Obsidian plugin before --desktop')
+        native_path = destination / f'amberkeep-obsidian-v{version}.zip'
+        write_zip(native_path, [(native / name, 'amberkeep/' + name) for name in ('main.js', 'manifest.json', 'styles.css')] + [(ROOT / 'LICENSE', 'amberkeep/LICENSE')])
+        extension = ROOT / 'desktop-extension' / 'dist' / 'amberkeep-desktop.mcpb'
+        if not extension.is_file() or extension.is_symlink():
+            raise ValueError('Build the Claude Desktop extension before --desktop')
+        extension_path = destination / f'amberkeep-desktop-v{version}.mcpb'
+        if extension_path.is_symlink():
+            raise ValueError('Refusing a symlink in release output')
+        extension_path.write_bytes(extension.read_bytes())
+        knowledge_path = destination / f'amberkeep-knowledge-demo-v{version}.zip'
+        with tempfile.TemporaryDirectory(prefix='amberkeep-knowledge-demo-') as temporary:
+            knowledge_output = Path(temporary) / 'Amberkeep-Demo'
+            result = subprocess.run(['node', str(ROOT / 'tools' / 'build_knowledge_demo.js'), '--output', str(knowledge_output)], check=True, capture_output=True, text=True)
+            desktop_demo = json.loads(result.stdout)
+            write_zip(knowledge_path, [(file, 'Amberkeep-Demo/' + file.relative_to(knowledge_output).as_posix()) for file in sorted(knowledge_output.rglob('*')) if file.is_file()])
+        outputs.extend([native_path, extension_path, knowledge_path])
     checksums = "".join(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.name}\n" for path in outputs)
     (destination / "SHA256SUMS.txt").write_text(checksums, encoding="utf-8")
-    print(json.dumps({"version": version, "files": [path.name for path in outputs] + ["SHA256SUMS.txt"], "demo": summary}, indent=2))
+    print(json.dumps({"version": version, "files": [path.name for path in outputs] + ["SHA256SUMS.txt"], "demo": summary, "knowledge_demo": desktop_demo}, indent=2))
 
 
 if __name__ == "__main__":

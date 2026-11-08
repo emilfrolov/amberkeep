@@ -1,145 +1,98 @@
 <p align="center">
-  <img src="assets/amberkeep-hero.png" alt="Amberkeep — preserve your conversations in an archive you own" width="100%">
-</p>
-
-<p align="center">
-  <a href="https://github.com/emilfrolov/amberkeep/actions/workflows/tests.yml"><img src="https://github.com/emilfrolov/amberkeep/actions/workflows/tests.yml/badge.svg?branch=main&amp;event=push" alt="Tests (main)"></a>
-  &nbsp; Python 3.10+ &nbsp;·&nbsp; MIT &nbsp;·&nbsp; No dependencies
+  <img src="assets/amberkeep-hero.png" alt="Amberkeep — keep your conversations and own your archive" width="100%">
 </p>
 
 <h1 align="center">Amberkeep</h1>
-<p align="center"><strong>Your conversations, preserved.</strong><br>Turn a Claude data export into a linked Obsidian archive.</p>
+<p align="center"><strong>Your conversations. Connected.</strong><br>Bring your Claude history into an evidence-linked Obsidian knowledge graph.</p>
 <p align="center">
-  <a href="https://github.com/emilfrolov/amberkeep/releases/latest">Download</a> ·
-  <a href="docs/INSTALLATION.md">Installation</a> ·
-  <a href="docs/EXPORT-GUIDE.md">Export guide</a> ·
+  <a href="https://github.com/emilfrolov/amberkeep/actions/workflows/tests.yml"><img src="https://github.com/emilfrolov/amberkeep/actions/workflows/tests.yml/badge.svg?branch=main&amp;event=push" alt="Tests (main)"></a>
+  &nbsp; macOS desktop preview &nbsp;·&nbsp; MIT
+</p>
+<p align="center">
+  <a href="https://github.com/emilfrolov/amberkeep/releases/tag/v0.2.0">Desktop preview</a> ·
+  <a href="docs/INSTALLATION.md">Install</a> ·
+  <a href="docs/KNOWLEDGE-GRAPH.md">How the graph works</a> ·
   <a href="docs/PRIVACY.md">Privacy</a> ·
-  <a href="COMMUNITY.md">Community</a> ·
-  <a href="CONTRIBUTING.md">Contribute</a>
+  <a href="COMMUNITY.md">Community</a>
 </p>
 
 ---
 
-Long conversations deserve a life beyond a chat window. Amberkeep turns the data you download from Claude into Markdown you can browse, link, search, and keep in Obsidian.
+Connect your own Claude account once inside Obsidian. Amberkeep synchronizes accessible conversations and supported project and memory material into linked notes, then helps turn that material into concepts, decisions, and questions with quotations leading back to their sources.
 
-Install it as a Claude skill, use it as a Claude Code plugin, or run the same converter directly with Python. The converter has **no third-party dependencies, no network requests, and no telemetry**.
+History sync can run automatically while Obsidian is open. Semantic analysis uses either **Claude Desktop through a local extension** when you ask, or an **explicitly configured local Ollama model** after each sync. No Anthropic API key is required.
 
-> **Early release:** Amberkeep imports the data present in the export you provide. It cannot retrieve deleted conversations, recover files missing from the export, or guarantee that every export variant has a dedicated Markdown view. Every accepted source file is preserved byte for byte, and the import report explains recognition gaps.
+> **0.2.0 is an experimental desktop preview.** Direct retrieval uses Claude's unsupported website API, and embedded sign-in can fail or change. Validation is limited to automated tests and a local Linux Electron fixture; a live macOS login and complete real-account workflow have not been validated. The graph represents accessible sources and completed analysis, not a verified reconstruction of everything you have ever discussed.
 
-## What you get
+## Download the desktop preview
 
-| From your export | In your Obsidian archive |
+| Download | Purpose |
 | --- | --- |
-| Conversations and messages | A note per conversation, speaker labels, timestamps, and a linked index |
-| Projects | Project notes and available project document content |
-| Exported memory | Notes for available conversation memory, project memory, and memory files |
-| Account data and other JSON | Readable data notes and the original source |
-| Tool calls, artifacts, and unfamiliar content | Preserved source data; supported content rendered without executing it |
-| Every source file | Original bytes in `Raw/`, with a path map and SHA-256 hashes |
+| [Obsidian plugin ZIP](https://github.com/emilfrolov/amberkeep/raw/refs/heads/main/downloads/v0.2.0/amberkeep-obsidian-v0.2.0.zip) | Direct history sync, managed notes, dashboard, and the local bridge |
+| [Claude Desktop extension](https://github.com/emilfrolov/amberkeep/raw/refs/heads/main/downloads/v0.2.0/amberkeep-desktop-v0.2.0.mcpb) | Let your current Claude session read synchronized sources and save evidence-backed knowledge |
+| [Synthetic knowledge-graph demo](https://github.com/emilfrolov/amberkeep/raw/refs/heads/main/downloads/v0.2.0/amberkeep-knowledge-demo-v0.2.0.zip) | Try a ready-made demo vault with invented sources and hand-authored example analysis |
 
-Amberkeep creates a **new folder** and can produce a ZIP. You choose whether to open it as a separate vault or copy the entire folder into an existing vault. It never updates your existing notes or installs an Obsidian plugin.
+The [v0.2.0 release page](https://github.com/emilfrolov/amberkeep/releases/tag/v0.2.0) contains the preview downloads. The demo is not a recording of a real AI analysis or a real account sync. The earlier [v0.1.0 release](https://github.com/emilfrolov/amberkeep/releases/tag/v0.1.0) is the archive-import release.
 
-## Start here
+## Set up once on macOS
 
-### 1. Download your Claude data
+1. **Install the Obsidian plugin.** Unpack the plugin ZIP into `YOUR-VAULT/.obsidian/plugins/amberkeep/`, then enable Amberkeep in **Settings → Community plugins**. Keep that vault open.
+2. **Connect Claude.** Open Amberkeep's dashboard, choose **Connect Claude**, and sign in to your own account in its isolated panel. The first successful connection starts synchronization. It does not read Claude Desktop cookies or macOS Keychain entries.
+3. **Choose semantic analysis.** Open the `.mcpb` file in Claude Desktop, select the same Obsidian vault, and enable its tools in a conversation. Or configure an installed local Ollama model in Amberkeep's settings for automatic analysis.
 
-In Claude on the web or desktop, open **Settings → Privacy → Export data**. Download the export using the link sent to your account email. See the [export guide](docs/EXPORT-GUIDE.md) for account restrictions and export limitations.
+Normal installation needs no terminal setup, Python, or separately installed Node.js. [Full installation instructions](docs/INSTALLATION.md) cover folder placement, sign-in limitations, and updates.
 
-### 2. Choose how to run Amberkeep
+For Claude Desktop, start with:
 
-**Claude chat — upload a skill**
+> Use Amberkeep to sync my history and build my knowledge graph in Obsidian. Check synchronization progress, then process pending sources in manageable batches. Read every page of each source, extract useful concepts, decisions, and open questions, and save them with exact quotations linking back to their source messages. Report what remains pending or failed, then open the graph.
 
-1. Download `amberkeep-skill-v0.1.0.zip` from [Releases](https://github.com/emilfrolov/amberkeep/releases/latest).
-2. In Claude, open **Customize → Skills → Add → Upload a skill** and upload the ZIP. Enable code execution and file creation if required by your account.
-3. Attach the data export and ask:
+A large history may need a later request to continue. Completed sources are tracked by their current content hash; reading one page does not mark a whole source as analysed.
 
-   > Use Amberkeep to convert this Claude export into an Obsidian archive. Include all conversations, projects, and exported memory. Keep the original source data and give me the ZIP and import report.
+## What the graph contains
 
-Uploading your archive to Claude shares its contents with Claude under your account's settings. Use the local option below if you want to keep conversion on your computer.
+| Layer | What it gives you |
+| --- | --- |
+| Source notes | Conversations, available project material, and supported memory records with stable identities and message anchors |
+| Structural links | Available project and source associations |
+| Lexical navigation | Labelled recurring-term topics and candidate excerpts; these are wording-based suggestions |
+| Semantic knowledge | Model-written concepts, decisions, questions, people, tools, and relationships with validated source quotations |
 
-**Claude Code — install the community plugin**
+The graph uses Obsidian's native wikilinks. **Open knowledge graph** opens the managed graph area; you can follow evidence links into source messages or inspect a smaller neighborhood with Obsidian's local graph.
 
-```text
-/plugin marketplace add emilfrolov/amberkeep
-/plugin install amberkeep@amberkeep-community
-```
+Evidence validation checks the current source hash, message identifiers, and verbatim quotations. It does not prove that a model's interpretation is correct. [Read how the graph works](docs/KNOWLEDGE-GRAPH.md).
 
-Then ask Amberkeep to convert the export at an explicit local path, or invoke `/amberkeep:archive-to-obsidian`. The marketplace above is this repository's community listing; Amberkeep is independently published.
+## Keep it growing
 
-**Terminal — run locally**
+After you explicitly connect, history sync defaults to every 15 minutes while Obsidian is open. **Automatic history sync** can be turned off or changed in settings. Enabled connections can resume synchronization on later launches.
 
-Requires Python 3.10 or newer. No package installation is needed.
+- With **Claude Desktop**, ask the current chat to analyse pending sources. There is no unattended cloud-model session running behind the scenes.
+- With an installed **local Ollama model**, enter its exact name in **Local Ollama model (optional)**. Pending sources are analysed after sync while Obsidian and Ollama are running. Amberkeep does not install a model, and the setting is empty by default.
 
-```bash
-git clone https://github.com/emilfrolov/amberkeep.git
-cd amberkeep
-python3 skills/archive-to-obsidian/scripts/convert.py \
-  --input "/path/to/claude-export.zip" \
-  --output "/path/to/Claude-Archive" \
-  --zip "/path/to/Claude-Archive.zip"
-```
+Oversized or invalid analysis remains pending. The dashboard distinguishes synchronized sources, analysed sources, warnings, and unfinished work. Partial syncs keep earlier cached records; they do not silently delete source notes.
 
-The output folder and ZIP must not already exist; their parent folders must exist. An extracted export directory or a single JSON file is also accepted. For additional options, run the command with `--help`.
+## Keep control of your notes and data
 
-### 3. Open the archive in Obsidian
+Generated notes live under `Amberkeep/` by default. You can write outside their managed blocks. If a generated block was edited, Amberkeep preserves it and saves a proposed update under `Conflicts/`. It does not delete existing notes to resolve missing sources or conflicts.
 
-Unzip the result if necessary. Open its parent folder as a vault, or copy the **whole generated folder** into your vault. Preserve its name and internal structure so the namespaced links keep resolving. Begin with the generated index and read `EXPORT-REPORT.md` before discarding any source data.
+Native synchronization makes authenticated requests to Claude. Its source cache and knowledge data are stored in your vault's plugin directory and may be included in vault sync or backups. Claude Desktop analysis sends the requested source pages to the current model session; local analysis sends them to the loopback Ollama service you selected. There is no Amberkeep telemetry or developer-operated data service. See [privacy and data handling](docs/PRIVACY.md).
 
-## Try it without personal data
+## Archive import remains available
 
-The repository includes a small [synthetic export](examples/demo-export). It contains invented conversations, a project, memory, account data, and an unfamiliar content block.
+If native sign-in or direct retrieval does not work for your account, the independent archive converter can still process a downloaded Claude export. It uses Python 3.10+ with no third-party dependencies and makes no network requests.
 
-```bash
-python3 skills/archive-to-obsidian/scripts/convert.py \
-  --input examples/demo-export \
-  --output /tmp/Amberkeep-Demo \
-  --zip /tmp/Amberkeep-Demo.zip
-```
+Use the [archive export guide](docs/EXPORT-GUIDE.md), [format support guide](docs/FORMAT-SUPPORT.md), or the [archive skill ZIP](https://github.com/emilfrolov/amberkeep/raw/refs/heads/main/downloads/v0.2.0/amberkeep-skill-v0.2.0.zip). That skill imports supplied files; it is separate from the native Obsidian connection.
 
-Example requests:
+## Documentation and community
 
-- “Convert this export into a new Obsidian archive and show the conversation and message counts.”
-- “Import the project notes and exported memory too, and tell me what was only preserved as raw data.”
-- “Build the archive locally from `/path/to/export.zip`; save it in a new folder and give me the import report.”
+- [Install and update](docs/INSTALLATION.md) · [Desktop workflow](docs/DESKTOP.md)
+- [Knowledge graph](docs/KNOWLEDGE-GRAPH.md) · [Privacy](docs/PRIVACY.md) · [Support](SUPPORT.md)
+- [Community](COMMUNITY.md) · [Contribute](CONTRIBUTING.md) · [Maintainer guide](docs/MAINTAINING.md)
+- [Security](SECURITY.md) · [Changelog](CHANGELOG.md)
 
-## Designed to preserve, not guess
-
-Claude's export format can change, and Anthropic does not publish a stable export schema. Amberkeep recognizes observed formats and retains the original bytes alongside the Markdown views. See [format support](docs/FORMAT-SUPPORT.md) for the difference between supported rendering and source preservation.
-
-- Missing or unsupported data is reported rather than silently advertised as restored.
-- Original uploaded files are generally absent from Claude exports. Attachment descriptions and extracted text are not the original files.
-- Imported code, tools, and artifact content are treated as data. The converter does not execute them or fetch attachment URLs.
-- Multiple export batches are processed separately; this release does not merge or synchronize archives.
-
-## Documentation
-
-- [Installation and manual skill setup](docs/INSTALLATION.md)
-- [Getting your export and moving it into Obsidian](docs/EXPORT-GUIDE.md)
-- [Supported formats and limitations](docs/FORMAT-SUPPORT.md)
-- [Privacy and data handling](docs/PRIVACY.md)
-- [Troubleshooting](docs/TROUBLESHOOTING.md)
-- [Community guide](COMMUNITY.md) · [Getting help](SUPPORT.md)
-- [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Changelog](CHANGELOG.md)
-
-## Join the community
-
-Try the synthetic demo, help someone with installation, report an export shape with an invented example, or improve a guide. Code, documentation, translations, and thoughtful bug reports all help Amberkeep become more useful.
-
-Start with the [community guide](COMMUNITY.md) to choose a first contribution. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and pull requests, [SUPPORT.md](SUPPORT.md) for questions, and the [code of conduct](CODE_OF_CONDUCT.md) for participation expectations. The [maintainer guide](docs/MAINTAINING.md) describes reviews and releases.
-
-## Development
-
-```bash
-python3 -m unittest discover -s tests -v
-python3 tools/build_release.py
-```
-
-Release archives are written to `dist/`. The skill ZIP contains the skill folder; the plugin ZIP contains the plugin and documentation. Neither includes personal exports or generated archives.
-
-The initial release is verified with synthetic fixtures and Claude Code's plugin validator. A real-account export and a live Claude chat/Cowork session have not been validated. Compatibility reports using minimal synthetic reproductions are welcome.
+The desktop source is in `obsidian-plugin/` and `desktop-extension/`; Node.js 22 is used for development and CI. Runtime packages are bundled for installation. See the contribution and maintainer guides for development checks.
 
 ## License and affiliation
 
 [MIT](LICENSE). Created by [emilfrolov](https://github.com/emilfrolov).
 
-Amberkeep is an independent community project. It is not affiliated with or endorsed by Anthropic or Obsidian. Claude and Obsidian are trademarks of their respective owners.
+Amberkeep is an independent community project, not affiliated with or endorsed by Anthropic or Obsidian. Claude and Obsidian are trademarks of their respective owners.

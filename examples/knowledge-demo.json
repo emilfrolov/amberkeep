@@ -1,0 +1,34 @@
+{
+  "notice": "Entirely invented sources and hand-authored semantic fixtures; not a real account export or a claim that a model generated this demo.",
+  "snapshot": {
+    "version": 1,
+    "fetchedAt": "2026-11-08T12:00:00Z",
+    "complete": true,
+    "warnings": [],
+    "organizations": [{"id": "demo-workspace", "name": "Invented workspace"}],
+    "projects": [{"id": "demo-project", "organizationId": "demo-workspace", "title": "A personal knowledge library", "description": "A fictional project connecting source conversations, local storage, and knowledge notes.", "instructions": "Separate source evidence from interpretation.", "documents": [{"id": "demo-document", "title": "Evidence principles", "text": "Every knowledge claim should retain an exact source quotation."}]}],
+    "conversations": [
+      {"id": "storage", "organizationId": "demo-workspace", "projectId": "demo-project", "title": "Choosing local storage", "updatedAt": "2026-11-08T10:00:00Z", "messages": [
+        {"id": "storage-1", "role": "human", "text": "We chose SQLite for local storage because the archive should work without a server."},
+        {"id": "storage-2", "role": "assistant", "text": "Use full-text search to find the original conversations. Keep source quotations alongside derived claims.", "parentId": "storage-1"}
+      ]},
+      {"id": "links", "organizationId": "demo-workspace", "projectId": "demo-project", "title": "Making the knowledge useful", "updatedAt": "2026-11-08T11:00:00Z", "messages": [
+        {"id": "links-1", "role": "human", "text": "SQLite is the storage layer; the knowledge graph connects concepts, decisions, and their source conversations."},
+        {"id": "links-2", "role": "assistant", "text": "A useful knowledge graph links related ideas and gives each interpretation a traceable source quotation.", "parentId": "links-1"}
+      ]}
+    ],
+    "memories": [{"id": "demo-memory", "organizationId": "demo-workspace", "title": "Working preferences", "text": "Prefer local storage and explicit provenance when organizing notes."}]
+  },
+  "analyses": [
+    {"conversationId": "storage", "concepts": [
+      {"title": "SQLite", "kind": "tool", "summary": "The fictional project selects SQLite for local storage.", "evidence": [{"messageId": "storage-1", "quote": "We chose SQLite for local storage because the archive should work without a server."}]},
+      {"title": "Keep the archive local", "kind": "decision", "summary": "The archive is intended to work without a server.", "evidence": [{"messageId": "storage-1", "quote": "the archive should work without a server"}]},
+      {"title": "Source provenance", "kind": "concept", "summary": "Derived claims should retain source quotations.", "evidence": [{"messageId": "storage-2", "quote": "Keep source quotations alongside derived claims."}]}
+    ], "relations": [{"from": "Keep the archive local", "to": "SQLite", "type": "uses"}]},
+    {"conversationId": "links", "concepts": [
+      {"title": "SQLite", "kind": "tool", "summary": "SQLite is described as the storage layer, separate from the graph.", "evidence": [{"messageId": "links-1", "quote": "SQLite is the storage layer"}]},
+      {"title": "Knowledge graph", "kind": "concept", "summary": "The graph connects ideas, decisions, and the conversations that support them.", "evidence": [{"messageId": "links-1", "quote": "the knowledge graph connects concepts, decisions, and their source conversations"}]},
+      {"title": "Source provenance", "kind": "concept", "summary": "Each interpretation needs a traceable source quotation.", "evidence": [{"messageId": "links-2", "quote": "gives each interpretation a traceable source quotation"}]}
+    ], "relations": [{"from": "Knowledge graph", "to": "Source provenance", "type": "depends_on"}, {"from": "Knowledge graph", "to": "SQLite", "type": "uses"}]}
+  ]
+}

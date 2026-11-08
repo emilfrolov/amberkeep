@@ -1,0 +1,10 @@
+{
+  "id": "amberkeep",
+  "name": "Amberkeep",
+  "version": "0.2.0",
+  "minAppVersion": "1.7.0",
+  "description": "Sync Claude history directly into a source-linked knowledge graph, with Claude Desktop or local semantic analysis.",
+  "author": "emilfrolov",
+  "authorUrl": "https://github.com/emilfrolov",
+  "isDesktopOnly": true
+}

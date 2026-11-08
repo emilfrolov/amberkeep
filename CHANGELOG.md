@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- No changes yet.
+
+## 0.2.0 — 2026-11-08 (desktop preview)
+
+- Native Obsidian plugin with isolated Claude sign-in and incremental direct history sync.
+- Source-backed conversations, projects, documents, memory, and readable stable graph paths.
+- Claude Desktop MCP semantic analysis with exact evidence and complete-source paging checks.
+- Optional automatic local Ollama analysis, protected note updates, and stale-analysis retirement.
+- Installable Obsidian ZIP, MCPB companion, and synthetic knowledge-map demo.
+- Direct API and embedded sign-in are experimental; real-account macOS compatibility remains unvalidated.
+
+### Community documentation
+
 - Expanded community and contribution guides, support and conduct policies, and a maintainer release guide.
 - Added issue forms for bugs, export formats, ideas, and usage questions, plus a pull request template.
 

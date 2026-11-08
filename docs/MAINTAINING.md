@@ -68,6 +68,21 @@ Repository contents access, release publishing, release-asset uploading, and adm
 
 ## Preserve the product boundary
 
-Amberkeep converts an explicitly provided export into a new folder. The current design preserves source bytes and uses no network calls, account scraping, credential access, automatic existing-vault edits, or execution of exported content. Discuss changes to those boundaries as a separate design proposal with clear data handling, rather than slipping them into a format fix.
+The archive converter is offline and creates a new folder with preserved source bytes. The desktop preview reads Claude through a separate user-authorized browser session and updates only owned note blocks. MCP uses an authenticated loopback bridge; optional model calls go to a configured loopback Ollama server. Keep these boundaries distinct. Never extract Desktop cookies or Keychain items, execute source content, send archives to a developer service, or silently broaden the account/vault scope.
 
 Security fixes should target the latest release, receive regression coverage with synthetic data, and explain the affected boundary without publishing private material. There is no guaranteed response or release schedule.
+
+## Desktop development and releases
+
+Use the pinned Node dependencies for the direct-sync and MCP components:
+
+```bash
+npm --prefix obsidian-plugin ci --ignore-scripts
+npm --prefix obsidian-plugin test
+npm --prefix obsidian-plugin run build
+npm --prefix desktop-extension ci --ignore-scripts
+npm --prefix desktop-extension run verify
+python3 tools/build_release.py --desktop
+```
+
+Desktop tests cover pagination, hashes, evidence, safe writes, loopback transport, and full-source paging. A mocked host or Linux Electron fixture is not a real-account macOS test. Use invented data publicly. Update both desktop manifests and package versions alongside the root version declarations for a release. The packaged demo uses hand-authored semantic fixtures, not a model run.

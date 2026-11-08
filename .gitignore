@@ -8,3 +8,7 @@ Thumbs.db
 /exports/
 /Obsidian-Archive*/
 *.zip
+*.mcpb
+**/node_modules/
+/obsidian-plugin/main.js
+/desktop-extension/dist/

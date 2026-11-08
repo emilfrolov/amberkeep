@@ -1,5 +1,7 @@
 # Format support and preservation
 
+This guide covers the **archive-import fallback**. For native account sync and semantic notes, see [the desktop guide](DESKTOP.md) and [knowledge graph](KNOWLEDGE-GRAPH.md).
+
 Amberkeep targets data already present in a user-supplied Claude export. Its readable notes are a view of that input, not a reconstruction of your account or a promise of complete historical recovery.
 
 ## Official scope versus observed schemas

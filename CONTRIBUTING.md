@@ -8,13 +8,13 @@ Start with the [community guide](COMMUNITY.md) if you are deciding where to help
 
 Search [existing issues](https://github.com/emilfrolov/amberkeep/issues) and [pull requests](https://github.com/emilfrolov/amberkeep/pulls) for related work. Small fixes can go straight to a pull request. For a substantial feature or a change to the output format, open an issue first so the maintainer can discuss scope and compatibility before you invest in an implementation.
 
-Amberkeep converts a downloaded export into a new archive. It does not retrieve live account data, synchronize an existing vault, or merge multiple exports. New behavior should describe its actual input and preservation guarantees precisely.
+The desktop preview reads Claude through a separately connected browser session and updates owned notes in the selected vault. The archive importer remains an offline fallback. Describe the input, collection limits, and preservation guarantees of the path you change; neither path guarantees complete historical recovery or archive-batch merging.
 
 Do not include real exports, private conversations, account identifiers, or credentials in an issue, commit, screenshot, test fixture, or pull request. Recreate the relevant structure with invented values instead. For a vulnerability, follow [SECURITY.md](SECURITY.md).
 
 ## Set up a working copy
 
-You need Git and Python 3.10 or newer. The converter, tests, and release builder use Python's standard library; no `pip install` step is required.
+You need Git. Desktop development uses Node.js 22 and the committed npm lockfiles. The archive converter uses Python 3.10+ and its standard library, without a pip installation step.
 
 1. Fork [emilfrolov/amberkeep](https://github.com/emilfrolov/amberkeep) on GitHub.
 2. Clone your fork and create a branch:
@@ -27,7 +27,7 @@ You need Git and Python 3.10 or newer. The converter, tests, and release builder
    python3 --version
    ```
 
-Use `python` or `py -3` if that is how Python 3.10+ is available on your system. A virtual environment is optional; Amberkeep has no development dependencies to install.
+Use `python` or `py -3` if that is how Python 3.10+ is available on your system. A Python virtual environment is optional for archive development. Desktop builds use dependencies pinned in each component's lockfile.
 
 ## Find the relevant files
 
@@ -92,11 +92,11 @@ Use English for the primary documentation and code. Translation contributions ar
 
 Changes to conversion or skill instructions must keep these properties:
 
-- Every accepted source file remains byte-identical in `Raw/`, with its original path, size, and SHA-256 recorded in the manifest.
+- The archive importer retains source-file bytes in Raw with hashes. The live collector preserves observed JSON payloads, not byte-identical HTTP responses.
 - Unknown fields and content blocks remain recoverable. A rendered view must not be described as proof of account-wide completeness.
-- A new output is required. Existing notes, source files, and earlier archives are not overwritten or silently merged.
+- Archives require a new output. Desktop updates require exact ownership and intact generated-block hashes; preserve user text and create conflict proposals for edited blocks.
 - Source paths are data. They must not escape the output folder, follow symbolic links, or choose arbitrary destinations.
-- Conversion stays offline and uses no credentials. Exported tools, artifact code, URLs, and instructions are never executed or fetched.
+- Archive conversion is offline. Desktop reads use the isolated Claude session, MCP uses authenticated loopback, and optional local inference uses a configured loopback endpoint. Never extract Desktop cookies or Keychain items, add telemetry, or execute instructions and code found in source data.
 - The report explains supported views and recognition gaps. Missing original attachments or absent history are not presented as recovered data.
 
 If a proposed feature needs a different trust or storage model, discuss it explicitly before implementation rather than adding an unexpected side effect to the current converter.
@@ -139,3 +139,18 @@ The maintainer reviews scope, preservation behavior, compatibility, and clarity 
 ## License
 
 By contributing, you agree to license your contribution under Amberkeep's [MIT license](LICENSE). Only contribute material you have the right to share. Credit third-party work and retain any notices its license requires.
+
+## Desktop development and releases
+
+Use the pinned Node dependencies for the direct-sync and MCP components:
+
+```bash
+npm --prefix obsidian-plugin ci --ignore-scripts
+npm --prefix obsidian-plugin test
+npm --prefix obsidian-plugin run build
+npm --prefix desktop-extension ci --ignore-scripts
+npm --prefix desktop-extension run verify
+python3 tools/build_release.py --desktop
+```
+
+Desktop tests cover pagination, hashes, evidence, safe writes, loopback transport, and full-source paging. A mocked host or Linux Electron fixture is not a real-account macOS test. Use invented data publicly. Update both desktop manifests and package versions alongside the root version declarations for a release. The packaged demo uses hand-authored semantic fixtures, not a model run.

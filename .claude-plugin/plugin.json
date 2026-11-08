@@ -1,8 +1,8 @@
 {
   "name": "amberkeep",
   "displayName": "Amberkeep",
-  "version": "0.1.0",
-  "description": "Turn a downloaded Claude data export into a linked Obsidian archive of conversations, projects, and memory, with original source bytes and an import report.",
+  "version": "0.2.0",
+  "description": "Guide evidence-linked Obsidian knowledge extraction through Amberkeep's Desktop companion, with an archive importer as a fallback.",
   "author": {
     "name": "emilfrolov",
     "url": "https://github.com/emilfrolov"
